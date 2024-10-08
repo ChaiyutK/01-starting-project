@@ -3,6 +3,14 @@ import RowResult from "./components/RowResult";
 import UserInput from "./components/UserInput";
 import { formatter,calculateInvestmentResults } from "./util/investment";
 
+function deriveUserInvestment(userInvestment,inputValue,label){
+    return(
+      {...userInvestment,
+        [label]:inputValue
+      }
+    )
+}
+
 function App() {
 
   const [userInvestment, setUserInvestment] = useState({
@@ -13,19 +21,17 @@ function App() {
   });
 
   const [result,setResult] = useState([]);
+  //let result = [];
 
   //console.log(formatter.format(1000))
 
   function handleChangeInvestment(inputValue,label){
     
-    setUserInvestment({
-      ...userInvestment,
-      [label]: inputValue,
-    });
+    setUserInvestment(prevUserInvest => deriveUserInvestment(prevUserInvest,inputValue,label));
 
     setResult(calculateInvestmentResults(userInvestment));
-    console.log(result)
-    
+    //result = calculateInvestmentResults(userInvestment);
+    console.log(userInvestment);
     
   
   }
@@ -45,7 +51,8 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <RowResult />
+          {result.map(year=>(<RowResult key={year.year} resultOnInvest={year}/>))}
+          
         </tbody>
       </table>
     </>
