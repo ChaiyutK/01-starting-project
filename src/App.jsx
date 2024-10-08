@@ -12,6 +12,8 @@ function App() {
     duration: 0,
   });
 
+  const [result,setResult] = useState([]);
+
   //console.log(formatter.format(1000))
 
   function handleChangeInvestment(inputValue,label){
@@ -21,8 +23,10 @@ function App() {
       [label]: inputValue,
     });
 
-    console.log(calculateInvestmentResults(userInvestment));
-  
+    setResult(calculateInvestmentResults(userInvestment));
+    console.log(result)
+    
+    
   
   }
  
