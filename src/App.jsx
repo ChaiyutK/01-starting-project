@@ -1,8 +1,20 @@
+import RowResult from "./components/RowResult";
 import UserInput from "./components/UserInput";
+import { formatter,calculateInvestmentResults } from "./util/investment";
+
 function App() {
+
+  console.log(formatter.format(1000))
+
+  function handleChangeInvestment(userInvestment){
+    const resultInvestment = calculateInvestmentResults(userInvestment);
+    console.log(resultInvestment);
+  }
+ 
+
   return (
     <>
-    <UserInput />
+    <UserInput onChangeInvestment={handleChangeInvestment} />
       <table id="result" className="center">
         <thead>
           <tr>
@@ -14,13 +26,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          <RowResult />
         </tbody>
       </table>
     </>
