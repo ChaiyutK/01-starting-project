@@ -27,7 +27,13 @@ function App() {
 
   function handleChangeInvestment(inputValue,label){
     
-    setUserInvestment(prevUserInvest => deriveUserInvestment(prevUserInvest,inputValue,label));
+    setUserInvestment((prevUserInvest) => {
+      const updatedUserInvestment = 
+      {...prevUserInvest,
+        [label]:inputValue
+      }
+      return updatedUserInvestment;
+    });
 
     setResult(calculateInvestmentResults(userInvestment));
     //result = calculateInvestmentResults(userInvestment);
