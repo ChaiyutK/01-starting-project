@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function UserInput({onChangeInvestment}) {
-  const [userInvestment, setUserInvestment] = useState({
+  /* const [userInvestment, setUserInvestment] = useState({
     initialInvestment: 0,
     annualInvestment: 0,
     expectedReturn: 0,
@@ -16,7 +16,7 @@ export default function UserInput({onChangeInvestment}) {
     
     onChangeInvestment(userInvestment);
 
-  }
+  } */
 
   //console.log(userInvestment);
 
@@ -28,7 +28,7 @@ export default function UserInput({onChangeInvestment}) {
           <input
             type="number"
             onChange={(event) => {
-              handleUserChange(event, "initialInvestment");
+              onChangeInvestment(+event.target.value,"initialInvestment");
             }}
             required
           />
@@ -38,7 +38,7 @@ export default function UserInput({onChangeInvestment}) {
           <input
             type="number"
             onChange={(event) => {
-              handleUserChange(event, "annualInvestment");
+              onChangeInvestment(+event.target.value,"annualInvestment");
             }}
             required
           />
@@ -50,7 +50,7 @@ export default function UserInput({onChangeInvestment}) {
           <input
             type="number"
             onChange={(event) => {
-              handleUserChange(event, "expectedReturn");
+              onChangeInvestment(+event.target.value,"expectedReturn");
             }}
             required
           />
@@ -60,7 +60,7 @@ export default function UserInput({onChangeInvestment}) {
           <input
             type="number"
             onChange={(event) => {
-              handleUserChange(event, "duration");
+              onChangeInvestment(+event.target.value,"duration");
             }}
             required
           />

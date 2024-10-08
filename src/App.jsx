@@ -1,14 +1,29 @@
+import { useState } from "react";
 import RowResult from "./components/RowResult";
 import UserInput from "./components/UserInput";
 import { formatter,calculateInvestmentResults } from "./util/investment";
 
 function App() {
 
-  console.log(formatter.format(1000))
+  const [userInvestment, setUserInvestment] = useState({
+    initialInvestment: 0,
+    annualInvestment: 0,
+    expectedReturn: 0,
+    duration: 0,
+  });
 
-  function handleChangeInvestment(userInvestment){
-    const resultInvestment = calculateInvestmentResults(userInvestment);
-    console.log(resultInvestment);
+  //console.log(formatter.format(1000))
+
+  function handleChangeInvestment(inputValue,label){
+    
+    setUserInvestment({
+      ...userInvestment,
+      [label]: inputValue,
+    });
+
+    console.log(calculateInvestmentResults(userInvestment));
+  
+  
   }
  
 
