@@ -14,38 +14,33 @@ function deriveUserInvestment(userInvestment,inputValue,label){
 function App() {
 
   const [userInvestment, setUserInvestment] = useState({
-    initialInvestment: 0,
-    annualInvestment: 0,
-    expectedReturn: 0,
-    duration: 0,
+    initialInvestment: 15000,
+    annualInvestment: 1200,
+    expectedReturn: 6,
+    duration: 10,
   });
 
-  const [result,setResult] = useState([]);
+  const [result,setResult] = useState(calculateInvestmentResults(userInvestment));
   //let result = [];
 
   //console.log(formatter.format(1000))
 
   function handleChangeInvestment(inputValue,label){
-    
-    setUserInvestment((prevUserInvest) => {
-      const updatedUserInvestment = 
-      {...prevUserInvest,
-        [label]:inputValue
-      }
-      return updatedUserInvestment;
-    });
 
-    setResult(calculateInvestmentResults(userInvestment));
+    const dataInvest = deriveUserInvestment(userInvestment,inputValue,label)
+
+    setUserInvestment(dataInvest)
+    setResult(calculateInvestmentResults(dataInvest));
     //result = calculateInvestmentResults(userInvestment);
-    console.log(userInvestment);
+   
     
   
   }
- 
+
 
   return (
     <>
-    <UserInput onChangeInvestment={handleChangeInvestment} />
+    <UserInput userInput={userInvestment} onChangeInvestment={handleChangeInvestment} />
       <table id="result" className="center">
         <thead>
           <tr>
