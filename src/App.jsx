@@ -28,7 +28,21 @@ function App() {
   function handleChangeInvestment(inputValue,label){
 
     const dataInvest = deriveUserInvestment(userInvestment,inputValue,label)
-
+    if(dataInvest.initialInvestment<0 || dataInvest.annualInvestment<0 || dataInvest.expectedReturn<0|| dataInvest.duration<0){
+      alert("Investment should more than 0");
+      if(dataInvest.initialInvestment<=0){
+        dataInvest.initialInvestment = 0;
+      }
+      else if(dataInvest.annualInvestment<=0){
+        dataInvest.annualInvestment = 0;
+      }
+      else if(dataInvest.expectedReturn<=0){
+        dataInvest.expectedReturn = 0;
+      }
+      else if(dataInvest.duration<=0){
+        dataInvest.duration = 0;
+      }
+    }
     setUserInvestment(dataInvest)
     setResult(calculateInvestmentResults(dataInvest));
     //result = calculateInvestmentResults(userInvestment);
@@ -40,6 +54,7 @@ function App() {
 
   return (
     <>
+    
     <UserInput userInput={userInvestment} onChangeInvestment={handleChangeInvestment} />
       <table id="result" className="center">
         <thead>
@@ -53,7 +68,6 @@ function App() {
         </thead>
         <tbody>
           {result.map(year=>(<RowResult key={year.year} resultOnInvest={year}/>))}
-          
         </tbody>
       </table>
     </>
